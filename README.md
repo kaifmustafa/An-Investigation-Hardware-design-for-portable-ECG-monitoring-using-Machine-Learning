@@ -1,0 +1,2 @@
+# An-Investigation-Hardware-design-for-portable-ECG-monitoring-using-Machine-Learning
+To design and investigate a portable Electrocardiogram (ECG) monitoring device integrated with Machine Learning (ML) algorithms for real-time heart health analysis. The device should be compact, energy-efficient, and capable of detecting and analyzing heart conditions like arrhythmias, atrial fibrillation, or other cardiac abnormalities.
