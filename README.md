@@ -30,17 +30,7 @@ The main ECG components are an AD8232 opAmp board utilized for reading the elect
 This is a 4 layer PCB board that uses a AD8232 breakout board for the ECG pickup. 
 The schematic, featuring over charge and discharge protection, switches to control: MCU power, 5V (charging) and Battery power. Also includes ESD protection for usb type C. The brains is an ESP32-C3-MINI-1-N4.
 
-<img alt="3D model" src="media/pcb_3d_1.PNG" width="600"/>
-<img alt="4 layers" src="media/pcb_3d_2.PNG" width="600"/>
 
-#### PCB layout 
-<img alt="Layer 1,2,3,4" src="media/pcb_1.PNG" width="600"/>
-<img alt="Layer 2,3,4" src="media/pcb_2.PNG" width="600"/>
-<img alt="Layer 3,4" src="media/pcb_3.PNG" width="600"/>
-<img alt="Layer 4" src="media/pcb_4.PNG" width="600"/>
-
-#### Schematic
-<img alt="Layer 4" src="media/schematic.PNG" width="600"/>
 
 
 #### Findings & Changes
@@ -68,8 +58,6 @@ In order to create the dataset locally, run 'Models and Prediction/reciever.py'.
 
 Modification in limb electrode placement invokes changes in ECG wave amplitudes, which may alter the clinical limits of ECG normality detection. It was uncovered that leads placed no further than 12” apart yield the cleanest readings. 
 
-<img alt="lead_proximity" src="media/lead_proximity.png" width="600"/>
-
 ---------------
 
 ### Processing and Filtering @CTy27
@@ -82,7 +70,6 @@ A technique known as imputation was used to recover lost values by synthesizing 
 
 The chosen implementation uses a 3rd order, lowpass Butterworth filter with a cutoff frequency of 50 Hz. 50Hz was found to be the optimal amount as observable high-frequency artifacts from power line interference and EMG were removed without limiting the low-frequency salient information. Lowering this cut-off frequency further resulted in distortion to the amplitude of the peaks, which would have adversely affected the prediction model’s performance. 
 
-<img alt="ECG_filter" src="media/ECG_filter.png" width="600"/>
 
 
 
@@ -91,7 +78,6 @@ Testing different filters and parameters was largely trial and error testing. Lo
 
 High pass and bandpass filters were susceptible to baseline wander, from samples 4,000 – 5,000 that the signal baseline drifts upwards. The high pass was also unable to filter out the high-frequency noise induced by Electromyography muscular activity (EMG), motion artifacts, and residual channel noise. The clear choice was lowpass as it maintains the salient, low-frequency information without distorting the signal with baseline wander. 
 
-<img alt="ECG_filter_types" src="media/ECG_filter_types.png" width="600"/>
 
 There lies uncertainty in the exclusive use of lowpass to filter out noise, as a bandpass and a notch filter ensemble are standard for ECG data.  Solely relying on low-pass filters is not a common approach, however, the final product was sufficient for the classification models to perform adequately. 
 
